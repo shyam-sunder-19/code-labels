@@ -1,0 +1,32 @@
+.labels-div{
+    min-height: 200px;
+    background-color: rgba(128, 128, 128, 0.5);
+    padding: 5px;
+}
+
+.existing-labels{
+    display: flex;
+    min-height: 200px;
+    background-color: rgba(128, 128, 128, 0.5);
+    padding: 5px;
+}
+
+.labels-submit{
+    padding: 5px;
+}
+
+.label {
+    background-color: white;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-around;
+    width: fit-content;
+    height: fit-content;
+    border: 2px solid black;
+    margin-right: 5px;
+}
+
+.label > div {
+    padding: 0px 4px;
+    border: 2px solid black;
+}

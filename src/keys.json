@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "lucid-dynamo-282206",
+  "private_key_id": "4a988db34076fb7ca30580f195b1917da1fcb3f4",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDLUb6cU3ibWhDg\nkXBgh0Q/8AZhZj4Nrq0aOzHJjLfNgiKbsL7w0RJBh9sHWNgVeWEH1TRr+JuGjGFz\nEL7FzKXYBDyhkyb4ZbJeXCxWpngYRhbdkdZiBSIJ5fngs78Hv3Y4vUHe3FzJMJdG\nRdw0dkzIPTADQ/cyGmu0mMI9UU8UGyyrRk7qDVserbzcd6sl26MY9yDhAdzlzq1w\n/z9h6UeTtD3PaE3mEw+JRxeUXgNJerlxTP3YwWpvJfL7bSym9PySVOeBHHOyQbe2\noMlj7099Q4aKbw0vl+J4Dy63ddEgKMM+9hUrW+msDz0mC1r69+2204JjgICLKvpG\nP4Yb0UZPAgMBAAECggEAG7BFMgrYCOgKFlsYH70sGTz50XfYCYr5PfJDxHvqaA1J\n40P9rNP8FXqH5Ic/3iTKhwONAQs5OuiRONdV85/8Ed/51dMxYnCPCvSogSBoiH27\nDW+X739ddFWiYux3nnl/gxibCNufszJv130aEPbvW/GhQUCXQHaCpnSLN0iEaWtP\nrtAlKxRVJ+RoLXSc4fPaP+JtDDvODgSIVzX2w1fiE5GWsNQ7cVRcIl2ySzW6GmyD\nvHe8nxmFBGjEKEZWJZVvlelaKwldk9/OIDGgS8yd+e1zQqi2v4eHXwWYyvSkE6p0\nP+0XsOaEAEgImhwdugK3ep32brHKPCLUs59M1f8SwQKBgQD0ku7GdxHMt+2CuIqy\n730PpyzhTkgRgAZFIXHrmzdDfPAJFTm6w5vzwj/1TMDRegrR+QLiZ2VOq5+wftP0\n4eq3/2GaFlhZgUEkm6O8Mrqmm0WUkV2Z3FxVJ8f0OQPkdYohaAGESr0/RZLKTuCB\nTJmWbuJtMdyxA0wEA/6IFHpOIQKBgQDU0Wmh/+s6hkIEkETnRd25V8iO1dlskzqz\naVRrhGsDKHlG/JYdQhSClj38iPRTc6HdvyccXYkUrlVlP/nl0sNFe1/WoKz3P4FO\nWeYBMLh3eWZZADYJ9rhxVNb+0QMl4Zc0oXrCGTTTkSMwYHRe6Yehj8f6WyN0QxYJ\n84vfKCCmbwKBgEdoqzzZQSIzxa44MY8DK9GpLwptr88kQTBoDnoLLLyQuwj74Iou\nWNd4LPJzQY0oBAbAnN378HFi3NJMhZhnaf/lGdtCkPM5MQr+QnVNnn/MsCkrtFeb\nJn5aiiA9kWxgAT+1vVOh+tWBe9WD6Dr4YZOxtnzJZTVt0AEQJX4X9InhAoGBAKDu\nxzmpRKGaG1xGGMTnUXcyCcjxsBxp7a70jNFNbnsR5TwoEACKEuZ5ZOCOVGyy+Ymt\nXo8VsG7CMnOBgKEp0168oEm2cXX7QPYWB1eJF0XJuPq+rR61wt548Kf7OK0xvd0f\n66vR0d/XVkvj9Lw9TsJ+7xPETbhCbu0Rjgkv2BjjAoGBAMytXcvzF0StlmMjA4zw\nMcXBSgepSPpJU9LdpOj7m3qpnUSmFyxjIMsKrphpK9SHNZofbEgN//PmdDWCG1jE\n36/TcWrMrrJtcroPZuAP2eG3SvwIlhDnXzYOrrqBj0ocPyZSFXZL5n46d09eq4at\n8uxsBUiJQvZbpISxhgGFobqC\n-----END PRIVATE KEY-----\n",
+  "client_email": "test-code-labels@lucid-dynamo-282206.iam.gserviceaccount.com",
+  "client_id": "112136196272346018328",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/test-code-labels%40lucid-dynamo-282206.iam.gserviceaccount.com"
+}
