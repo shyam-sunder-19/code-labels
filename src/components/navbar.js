@@ -28,7 +28,7 @@ const NavbarComponent = () => {
         <>
             <Navbar bg="primary" expand="lg">
             <Container>
-                <Navbar.Brand onClick={() => onClickLogo()}><button>Code Labels</button></Navbar.Brand>
+                <Navbar.Brand onClick={() => onClickLogo()}><button>Open Codenet</button></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">

@@ -13,6 +13,7 @@ window.env = {
   "HOME": "/home/shyam",
   "CHROME_DESKTOP": "code-url-handler.desktop",
   "CONDA_SHLVL": "1",
+  "OLDPWD": "/home/shyam/code-labels/.git",
   "TERM_PROGRAM_VERSION": "1.70.2",
   "DESKTOP_SESSION": "ubuntu",
   "npm_package_json": "/home/shyam/code-labels/package.json",
