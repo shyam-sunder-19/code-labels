@@ -92,20 +92,25 @@ const LabelsDiv = () => {
     const postLabels = async(e) => {
         e.preventDefault()
         const commitType = e.target[0].value
+        console.log(commitType)
         const github = UserProfile.getName()
         console.log(commitType)
         if(github == ""){
             window.alert("you may not have signed up, go to the landing page and sign up")
         } else {
             const data = []
+
             labeled.forEach(label=>{
+                const index = labeled.indexOf(label)
+                const score = e.target[index+1].value
                 data.push(
                     {
                         "commit link": commitLink,
                         "commit id": commitId,
                         "type of commit": commitType,
                         "label": label,
-                        "github profile": github
+                        "github profile": github,
+                        "score": score
                     }
                 )
             })
@@ -159,7 +164,6 @@ const LabelsDiv = () => {
             </>
         )
     }
-
     const FormComponent = () => {
         return (
             <Form onSubmit={getNewCommit}>
@@ -194,6 +198,37 @@ const LabelsDiv = () => {
                             <Container>
                                 <Row>
                                     <Col>
+                                        <h3>existing labels</h3>
+                                        <div className='existing-labels'>
+                                            {
+                                                existingLabels.map(
+                                                    label => {
+                                                        return(
+                                                            <Label 
+                                                                labelData={label}
+                                                                onclick={label => addToLabeled(label)}
+                                                            />
+                                                        )
+                                                    }
+                                                )
+                                            }
+                                        </div>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <h3>Create New Label</h3>
+                                        <Form onSubmit={createNewLabel}>
+                                            <input></input>
+                                            <Button type="submit">+</Button>
+                                        </Form>
+                                    </Col>
+                                    <hr></hr>
+                                    <hr></hr>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <h3>Selected Labels</h3>
                                         <div className='labels-div'>
                                             {
                                                 labeled.map(
@@ -217,44 +252,43 @@ const LabelsDiv = () => {
                                             aria-label="Select Programming Language"
                                         >
                                             <option>type of commit</option>
-                                            <option value="Python">Peer Review</option>
-                                            <option value="JavaScript">Documentation</option>
-                                            <option value="C++">Bug/Issue Fix</option>
-                                            <option value="Java">Feature</option>
-                                            <option value="C">Process Change</option>
+                                            <option value="Peer Review">Peer Review</option>
+                                            <option value="Documentation">Documentation</option>
+                                            <option value="Bug/Issue Fix">Bug/Issue Fix</option>
+                                            <option value="Feature">Feature</option>
+                                            <option value="Process Change">Process Change</option>
                                         </Form.Select>
+                                        <p>input scores for the labels (1-10)</p>
+                                        {
+                                            labeled.map(
+                                                label => {
+                                                    return(
+                                                            <Form.Select 
+                                                                style={{ marginBottom:"10px"}} 
+                                                                aria-label={`Input Score (0-10) for ${label}`}
+                                                            >
+                                                                <option>{label}</option>
+                                                                <option value={1}>1</option>
+                                                                <option value={2}>2</option>
+                                                                <option value={3}>3</option>
+                                                                <option value={4}>4</option>
+                                                                <option value={5}>5</option>
+                                                                <option value={6}>6</option>
+                                                                <option value={7}>7</option>
+                                                                <option value={8}>8</option>
+                                                                <option value={9}>9</option>
+                                                                <option value={10}>10</option>
+                                                            </Form.Select>
+                                                    )
+                                                }
+                                            )
+                                        }
+                                        <p>submit inputs</p>
                                         <Button type="submit">Submit</Button>
                                     </Form>
                                 </div>
                                 <hr></hr>
-                                <Row>
-                                    <Col>
-                                        <div className='existing-labels'>
-                                            {
-                                                existingLabels.map(
-                                                    label => {
-                                                        return(
-                                                            <Label 
-                                                                labelData={label}
-                                                                onclick={label => addToLabeled(label)}
-                                                            />
-                                                        )
-                                                    }
-                                                )
-                                            }
-                                        </div>
-                                    </Col>
-                                </Row>
-                                <hr></hr>
-                                <Row>
-                                    <Col>
-                                        <h3>Create New Label</h3>
-                                        <Form onSubmit={createNewLabel}>
-                                            <input></input>
-                                            <Button type="submit">+</Button>
-                                        </Form>
-                                    </Col>
-                                </Row>
+                                <Row></Row>
                             </Container>
                         </Col>
                     </Row>
