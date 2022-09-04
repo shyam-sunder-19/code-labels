@@ -1,3 +1,4 @@
 html {
-    font-family: "Lucida Console";   
+    font-family: "Lucida Console"; 
+    overflow-x: hidden;  
 }
