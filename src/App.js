@@ -8,7 +8,6 @@ import {
 import DatasetsPage from './pages/datasetsPage';
 import LabelsPage from './pages/labelsPage';
 import LandingPage from './pages/landingPage';
-import UserAccount from './pages/userAccount';
 
 function App() {
   return (
@@ -16,7 +15,6 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="label" element={<LabelsPage />} />
-          <Route path="user" element={<UserAccount />} />
           <Route path="datasets" element={<DatasetsPage />} />
         </Routes>
       </BrowserRouter>
