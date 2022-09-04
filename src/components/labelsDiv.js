@@ -286,6 +286,7 @@ const LabelsDiv = () => {
                                     <Col>
                                         <h3>Selected Labels</h3>
                                         <p>Select the labels that you want to provide for scoring.</p>
+
                                         <div className='labels-div'>
                                             {
                                                 labeled.map(
