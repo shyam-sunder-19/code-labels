@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
+import { Col, Row } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import { Link, useNavigate } from "react-router-dom"
 
@@ -19,25 +20,25 @@ const NavbarComponent = () => {
     const onClickDatasets = () => {
         navigate('/datasets')
     }
-
-    const onClickUser = () => {
-        navigate('/user')
-    }
     
     return(
         <>
             <Navbar bg="primary" expand="lg">
-            <Container>
-                <Navbar.Brand onClick={() => onClickLogo()}><button>Open Codenet</button></Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                        <Nav.Link onClick={() => onClickLabels()}><button>Labels</button></Nav.Link>
-                        <Nav.Link onClick={() => onClickDatasets()}><button>Datasets</button></Nav.Link>
-                        <Nav.Link onClick={() => onClickUser()}><button>My Data</button></Nav.Link>
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
+                <Col>
+                    <Row style={{marginLeft: "10px"}}>
+                        <Navbar.Brand onClick={() => onClickLogo()}><button>Open Codenet</button></Navbar.Brand>
+                    </Row>
+                    <Row style={{marginLeft: "5px"}}>
+                        <Navbar.Toggle style={{width:"100px"}} aria-controls="basic-navbar-nav" />
+                        <Navbar.Collapse id="basic-navbar-nav">
+                            <Nav className="me-auto">
+                                <Nav.Link onClick={()=> onClickLogo()}><button>Home</button></Nav.Link>
+                                <Nav.Link onClick={() => onClickLabels()}><button>Labels</button></Nav.Link>
+                                <Nav.Link onClick={() => onClickDatasets()}><button>Datasets</button></Nav.Link>
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Row>
+                </Col>
             </Navbar>
         </>
     )

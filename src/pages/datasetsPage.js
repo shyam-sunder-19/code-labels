@@ -6,25 +6,13 @@ import Col from 'react-bootstrap/esm/Col'
 import Button from 'react-bootstrap/esm/Button'
 import UserProfile from '../user'
 import csvDownload from 'json-to-csv-export'
+import Footer from '../components/footer'
 
 import './styles/datasets.css'
 
 const DatasetsPage = () => {
 
-    const [dataset, setDataset] = useState([
-        {
-            "commit link": "",
-            "type of commit": "",
-            "label": "",
-            "github": ""
-        },
-        {
-            "commit link": "",
-            "type of commit": "",
-            "label": "",
-            "github": ""
-        }
-    ])
+    const [dataset, setDataset] = useState([])
     
     const getData = async (e) => {
         e.preventDefault()
@@ -58,7 +46,7 @@ const DatasetsPage = () => {
     return(
         <>
             <NavbarComponent />
-            <Col className="datasets" style={{margin:"20px"}}>
+            <Col className="datasets" style={{margin:"20px", marginBottom: "80px"}}>
                 <Row>
                     <Col>
                         <Form  onSubmit={getData}>
@@ -93,6 +81,7 @@ const DatasetsPage = () => {
                             }
                         </tbody>
                     </Table>
+                    <hr></hr>
                     <p>
                         ... {dataset.length} results found
                     </p>
@@ -101,6 +90,7 @@ const DatasetsPage = () => {
                     <Button onClick={downloadCsv}>Download Dataset</Button>
                 </Row>
             </Col>
+            <Footer />
         </>
     )
 }
