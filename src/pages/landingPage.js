@@ -5,21 +5,19 @@ import Container from 'react-bootstrap/esm/Container'
 import Row from 'react-bootstrap/esm/Row'
 import Col from 'react-bootstrap/esm/Col'
 import UserProfile from '../user'
+import { useNavigate } from 'react-router-dom'
 
+import Footer from '../components/footer'
 import './styles/landingpage.css'
 
 const LandingPage = () => {
-
+    const navigate = useNavigate()
     const FormComponent = () => {
         return (
             <Form onSubmit={loginUser}>
               <Form.Group className="mb-3" controlId="github_profile_link">
                 <Form.Label>Github Profile Link</Form.Label>
                 <Form.Control type="url" placeholder="Enter github" />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="years_of_exp">
-                <Form.Label>Years of Programming Experience</Form.Label>
-                <Form.Control type="number" placeholder="Enter Years" />
               </Form.Group>
               <Form.Group className="mb-3" controlId="language">
                 <Form.Label>Primary Programming Lanuage</Form.Label>
@@ -35,7 +33,6 @@ const LandingPage = () => {
     const loginUser = async (e) => {
         e.preventDefault()
         let github = e.target[0].value
-        const yrs_of_exp = e.target[1].value
         const prog_lang = e.target[2].value
 
         const index = github.lastIndexOf('/')
@@ -46,7 +43,6 @@ const LandingPage = () => {
 
         const data = [{
             "github profile": github,
-            "experience": yrs_of_exp,
             "primary language": prog_lang
         }]
         
@@ -89,25 +85,28 @@ const LandingPage = () => {
             window.alert("you have now signed up, you can go to the labels page to start labeling")
         }
         UserProfile.setName(github)
+        navigate('/label')
     }
 
     return(
         <>
             <NavbarComponent />
             <Container style={{marginTop:"10vh"}}>
-                <Row>
-                    <Col>
-                        <h2>Start Labeling</h2>
-                        <FormComponent />
-                    </Col>
-                    <Col>
+                <Col style={{margin: "0 auto", maxWidth: "500px"}}>
+                    <Row>
                         <h1>About Open Codenet</h1>
                         <div>
                         Crowdsourced, open database of labelled code commits for training and benchmarking classification models built to evaluate software code. 
                         </div>
-                    </Col>
-                </Row>
+                    </Row>
+                    <br></br>
+                    <Row>
+                        <h2>Start Labeling</h2>
+                        <FormComponent />
+                    </Row>
+                </Col>
             </Container>
+            <Footer />
         </>
     )
 }
