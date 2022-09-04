@@ -9,17 +9,98 @@ import { useState, useEffect } from 'react'
 import UserProfile from '../user'
 
 const LabelsDiv = () => {
-    const [existingLabels, setExistingLables] = useState(["novel","sorting","new"])
+
+    const [existingLabels, setExistingLables] = useState([])
     const [labeled, setLabeled] = useState([])
     const [commitId, setCommitId] = useState("")
     const [commitLink, setCommitLink] = useState("https://github.com")
+    const [sheetLabels, setSheetLabels] = useState([])
+
+    const getExistingLabels = async () => {
+        const labels = await fetch(
+            `https://sheet.best/api/sheets/4253adae-989a-427b-8e44-44be51365e06/tabs/existing_labels?_limit=10`
+        )
+        .then(
+            res => res.json()
+        )
+        .then(
+            res => {
+                return res
+            }
+        )
+        const labels_ = []
+        labels.map(
+            label => {
+                labels_.push(label.labels)
+            }
+        )
+        console.log(labels_)
+        setExistingLables(labels_)
+        return labels_
+        
+    }
 
     const createNewLabel = (e) => {
         e.preventDefault()
         const labelName = e.target[0].value
-        setExistingLables(
-            [...existingLabels,labelName]
-        )
+        if (existingLabels.includes(labelName)){
+            window.alert("label already exists")
+        } else {
+            setExistingLables(
+                [...existingLabels,labelName]
+            )
+            const data = [{
+                "labels": labelName
+            }]
+            const labels = async () => await fetch(
+                `https://sheet.best/api/sheets/4253adae-989a-427b-8e44-44be51365e06/tabs/existing_labels`
+            )
+            .then(
+                res => res.json()
+            )
+            .then(
+                res => {
+                    console.log(res)
+                    return res
+                }
+            )
+            .then(
+                res => {
+                    const result = []
+                    res.forEach(
+                        re => result.push(re.labels)
+                    )
+                    setSheetLabels(result)
+                    console.log(result)
+                }
+            ).then(
+                () => {
+                    if (!sheetLabels.includes(labelName)){
+                        console.log(sheetLabels)
+                        console.log(sheetLabels.includes(labelName))
+                        fetch("https://sheet.best/api/sheets/4253adae-989a-427b-8e44-44be51365e06/tabs/existing_labels", {
+                        method: "POST",
+                        mode: "cors",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data),
+                        })
+                        .then((r) => r.json())
+                        .then((data) => {
+                            // The response comes here
+                            console.log(data);
+                            return data
+                        })
+                        .catch((error) => {
+                            // Errors are reported there
+                            console.log(error);
+                        });
+                    }
+                }
+            )
+            labels()
+        }
     }
 
     const addToLabeled = (labelData) => {
@@ -95,7 +176,11 @@ const LabelsDiv = () => {
         console.log(commitType)
         const github = UserProfile.getName()
         console.log(commitType)
-        if(github == ""){
+        if (commitId == ''){
+            window.alert("please first choose a commit to label")
+        } else if (labeled.length == 0 || commitType =='type of commit'){
+            window.alert("please provide complete information for the commit, i.e. label, type of commit and scores")
+        } else if (github == "") {
             window.alert("you may not have signed up, go to the landing page and sign up")
         } else {
             const data = []
@@ -114,7 +199,7 @@ const LabelsDiv = () => {
                     }
                 )
             })
-            fetch("https://sheet.best/api/sheets/52c7c9e5-f96f-4604-8123-e34eb6779af7/tabs/labels", {
+            fetch("https://sheet.best/api/sheets/4253adae-989a-427b-8e44-44be51365e06/tabs/labels", {
                 method: "POST",
                 mode: "cors",
                 headers: {
@@ -148,20 +233,19 @@ const LabelsDiv = () => {
 
     const CommitData = () => {
         return(
-            <>
-                <h3>Commit_id: {commitId}</h3>
+            <div style={{"marginBottom":"5px", "marginTop": "15px"}}>
+                <p>Commit_id: {commitId}</p>
                 <h4
                     style={{
                         whiteSpace:"wrap"
                     }}
                 >
-                    >
-                    <a href={commitLink} target="_blank">
-                        {commitLink}
-                    </a>
+                    <Button href={commitLink} target="_blank">
+                        Go to Commit Page
+                    </Button>
+                    <p style={{"fontWeight":"200", "fontSize": "0.5em"}}>{commitLink}</p>
                 </h4>
-                <br></br>
-            </>
+            </div>
         )
     }
     const FormComponent = () => {
@@ -185,50 +269,60 @@ const LabelsDiv = () => {
             </Form>
           );
     }
-
+    const ExistingLabels = () => {
+        if (existingLabels.length == 0) {
+            getExistingLabels()
+        }
+        return (
+            <Row>
+                <Col>
+                    <h3>Existing Labels</h3>
+                    <div className='existing-labels'>
+                        {
+                            console.log(existingLabels)
+                        }
+                        {   
+                            Object.values(existingLabels).map(
+                                label => {
+                                    return(
+                                        <Label 
+                                            labelData={label}
+                                            onclick={label => addToLabeled(label)}
+                                        />
+                                    )
+                                }
+                            )
+                        }
+                    </div>
+                </Col>
+            </Row>
+        )
+    }
     return (
         <>
             <Container>
                     <Row>
                         <Col style={{ marginTop:"10vh", minWidth:"300px" }} sm={3}>
                             <FormComponent />
-                        </Col>
-                        <Col style={{ borderLeft:"2px solid black" }} sm={9}>
                             <CommitData />
+                        </Col>
+                        <Col style={{ borderLeft:"2px solid grey", marginTop:"5px" }} sm={9}>
                             <Container>
+                                <ExistingLabels />
                                 <Row>
-                                    <Col>
-                                        <h3>existing labels</h3>
-                                        <div className='existing-labels'>
-                                            {
-                                                existingLabels.map(
-                                                    label => {
-                                                        return(
-                                                            <Label 
-                                                                labelData={label}
-                                                                onclick={label => addToLabeled(label)}
-                                                            />
-                                                        )
-                                                    }
-                                                )
-                                            }
-                                        </div>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col>
+                                    <Col style={{"marginBottom":"15px"}}>
                                         <h3>Create New Label</h3>
                                         <Form onSubmit={createNewLabel}>
-                                            <input></input>
+                                            <input style={{"padding": "5px", "marginRight": "2px"}}></input>
                                             <Button type="submit">+</Button>
                                         </Form>
                                     </Col>
-                                    <hr></hr>
                                     <hr></hr>
                                 </Row>
                                 <Row>
                                     <Col>
                                         <h3>Selected Labels</h3>
+                                        <p>Select the labels that you want to provide for scoring.</p>
                                         <div className='labels-div'>
                                             {
                                                 labeled.map(
