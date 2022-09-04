@@ -141,7 +141,9 @@ const LabelsDiv = () => {
         console.log(commitType)
         const github = UserProfile.getName()
         console.log(commitType)
-        if(github == ""){
+        if (labeled.length == 0 || commitType =='type of commit'){
+            window.alert("please provide complete information for the commit, i.e. label, type of commit and scores")
+        } else if (github == "") {
             window.alert("you may not have signed up, go to the landing page and sign up")
         } else {
             const data = []
@@ -194,7 +196,7 @@ const LabelsDiv = () => {
 
     const CommitData = () => {
         return(
-            <div style={{"marginBottom":"5px", "marginTop": "15px", "padding": "5px"}}>
+            <div style={{"marginBottom":"5px", "marginTop": "15px"}}>
                 <p>Commit_id: {commitId}</p>
                 <h4
                     style={{
@@ -283,7 +285,8 @@ const LabelsDiv = () => {
                                 <Row>
                                     <Col>
                                         <h3>Selected Labels</h3>
-                                        <p>Select the labels that you want to provide</p>
+                                        <p>Select the labels that you want to provide for scoring.</p>
+
                                         <div className='labels-div'>
                                             {
                                                 labeled.map(

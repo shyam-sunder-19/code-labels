@@ -1,6 +1,5 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/Container';
 import { Col, Row } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import { Link, useNavigate } from "react-router-dom"
@@ -26,7 +25,8 @@ const NavbarComponent = () => {
             <Navbar bg="primary" expand="lg">
                 <Col>
                     <Row style={{marginLeft: "10px"}}>
-                        <Navbar.Brand onClick={() => onClickLogo()}><button>Open Codenet</button></Navbar.Brand>
+                        <Navbar.Brand onClick={() => onClickLogo()}><h3 style={{color: "white"}}>Open Codenet</h3></Navbar.Brand>
+
                     </Row>
                     <Row style={{marginLeft: "5px"}}>
                         <Navbar.Toggle style={{width:"100px"}} aria-controls="basic-navbar-nav" />
