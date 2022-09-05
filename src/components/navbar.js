@@ -26,7 +26,6 @@ const NavbarComponent = () => {
                 <Col>
                     <Row style={{marginLeft: "10px"}}>
                         <Navbar.Brand onClick={() => onClickLogo()}><h3 style={{color: "white"}}>Open Codenet</h3></Navbar.Brand>
-
                     </Row>
                     <Row style={{marginLeft: "5px"}}>
                         <Navbar.Toggle style={{width:"100px"}} aria-controls="basic-navbar-nav" />

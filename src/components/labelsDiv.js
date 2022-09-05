@@ -14,6 +14,31 @@ const LabelsDiv = () => {
     const [labeled, setLabeled] = useState([])
     const [commitId, setCommitId] = useState("")
     const [commitLink, setCommitLink] = useState("https://github.com")
+    const [sheetLabels, setSheetLabels] = useState([])
+
+    const getExistingLabels = async () => {
+        const labels = await fetch(
+            `https://sheet.best/api/sheets/4253adae-989a-427b-8e44-44be51365e06/tabs/existing_labels?_limit=10`
+        )
+        .then(
+            res => res.json()
+        )
+        .then(
+            res => {
+                return res
+            }
+        )
+        const labels_ = []
+        labels.map(
+            label => {
+                labels_.push(label.labels)
+            }
+        )
+        console.log(labels_)
+        setExistingLables(labels_)
+        return labels_
+        
+    }
 
     const getExistingLabels = async () => {
         const labels = await fetch(
@@ -42,30 +67,64 @@ const LabelsDiv = () => {
     const createNewLabel = (e) => {
         e.preventDefault()
         const labelName = e.target[0].value
-        setExistingLables(
-            [...existingLabels,labelName]
-        )
-        const data = [{
-            "labels": labelName
-        }]
-        fetch("https://sheet.best/api/sheets/52c7c9e5-f96f-4604-8123-e34eb6779af7/tabs/existing_labels", {
-            method: "POST",
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        })
-        .then((r) => r.json())
-        .then((data) => {
-            // The response comes here
-            console.log(data);
-            return data
-        })
-        .catch((error) => {
-            // Errors are reported there
-            console.log(error);
-        });
+        if (existingLabels.includes(labelName)){
+            window.alert("label already exists")
+        } else {
+            setExistingLables(
+                [...existingLabels,labelName]
+            )
+            const data = [{
+                "labels": labelName
+            }]
+            const labels = async () => await fetch(
+                `https://sheet.best/api/sheets/4253adae-989a-427b-8e44-44be51365e06/tabs/existing_labels`
+            )
+            .then(
+                res => res.json()
+            )
+            .then(
+                res => {
+                    console.log(res)
+                    return res
+                }
+            )
+            .then(
+                res => {
+                    const result = []
+                    res.forEach(
+                        re => result.push(re.labels)
+                    )
+                    setSheetLabels(result)
+                    console.log(result)
+                }
+            ).then(
+                () => {
+                    if (!sheetLabels.includes(labelName)){
+                        console.log(sheetLabels)
+                        console.log(sheetLabels.includes(labelName))
+                        fetch("https://sheet.best/api/sheets/4253adae-989a-427b-8e44-44be51365e06/tabs/existing_labels", {
+                        method: "POST",
+                        mode: "cors",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data),
+                        })
+                        .then((r) => r.json())
+                        .then((data) => {
+                            // The response comes here
+                            console.log(data);
+                            return data
+                        })
+                        .catch((error) => {
+                            // Errors are reported there
+                            console.log(error);
+                        });
+                    }
+                }
+            )
+            labels()
+        }
     }
 
     const addToLabeled = (labelData) => {
@@ -141,7 +200,9 @@ const LabelsDiv = () => {
         console.log(commitType)
         const github = UserProfile.getName()
         console.log(commitType)
-        if (labeled.length == 0 || commitType =='type of commit'){
+        if (commitId == ''){
+            window.alert("please first choose a commit to label")
+        } else if (labeled.length == 0 || commitType =='type of commit'){
             window.alert("please provide complete information for the commit, i.e. label, type of commit and scores")
         } else if (github == "") {
             window.alert("you may not have signed up, go to the landing page and sign up")
@@ -162,7 +223,7 @@ const LabelsDiv = () => {
                     }
                 )
             })
-            fetch("https://sheet.best/api/sheets/52c7c9e5-f96f-4604-8123-e34eb6779af7/tabs/labels", {
+            fetch("https://sheet.best/api/sheets/4253adae-989a-427b-8e44-44be51365e06/tabs/labels", {
                 method: "POST",
                 mode: "cors",
                 headers: {
@@ -286,7 +347,6 @@ const LabelsDiv = () => {
                                     <Col>
                                         <h3>Selected Labels</h3>
                                         <p>Select the labels that you want to provide for scoring.</p>
-
                                         <div className='labels-div'>
                                             {
                                                 labeled.map(

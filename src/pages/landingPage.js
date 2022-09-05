@@ -47,7 +47,7 @@ const LandingPage = () => {
         }]
         
         const existing = await fetch(
-            `https://sheet.best/api/sheets/52c7c9e5-f96f-4604-8123-e34eb6779af7/github%20profile/${github}`
+            `https://sheet.best/api/sheets/4253adae-989a-427b-8e44-44be51365e06/github%20profile/${github}`
         )
         .then(
             res => res.json()
@@ -63,7 +63,7 @@ const LandingPage = () => {
             window.alert("you've already signed up, go to the labels tab to start labeling")
         }
         else{
-            fetch("https://sheet.best/api/sheets/52c7c9e5-f96f-4604-8123-e34eb6779af7/tabs/user_data", {
+            fetch("https://sheet.best/api/sheets/4253adae-989a-427b-8e44-44be51365e06/tabs/user_data", {
                 method: "POST",
                 mode: "cors",
                 headers: {
