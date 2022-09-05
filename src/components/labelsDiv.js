@@ -40,6 +40,30 @@ const LabelsDiv = () => {
         
     }
 
+    const getExistingLabels = async () => {
+        const labels = await fetch(
+            `https://sheet.best/api/sheets/52c7c9e5-f96f-4604-8123-e34eb6779af7/tabs/existing_labels?_limit=10`
+        )
+        .then(
+            res => res.json()
+        )
+        .then(
+            res => {
+                return res
+            }
+        )
+        const labels_ = []
+        labels.map(
+            label => {
+                labels_.push(label.labels)
+            }
+        )
+        console.log(labels_)
+        setExistingLables(labels_)
+        return labels_
+        
+    }
+
     const createNewLabel = (e) => {
         e.preventDefault()
         const labelName = e.target[0].value
