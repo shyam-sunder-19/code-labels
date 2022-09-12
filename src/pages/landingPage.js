@@ -33,13 +33,13 @@ const LandingPage = () => {
     const loginUser = async (e) => {
         e.preventDefault()
         let github = e.target[0].value
-        const prog_lang = e.target[2].value
-
+        const prog_lang = e.target[1].value
         const index = github.lastIndexOf('/')
         console.log(index)
         console.log(github.length)
         github = github.slice(index+1)
         console.log(github)
+        console.log(prog_lang)
 
         const data = [{
             "github profile": github,

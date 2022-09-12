@@ -30,10 +30,10 @@ const NavbarComponent = () => {
                     <Row style={{marginLeft: "5px"}}>
                         <Navbar.Toggle style={{width:"100px"}} aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="me-auto">
-                                <Nav.Link onClick={()=> onClickLogo()}><button>Home</button></Nav.Link>
-                                <Nav.Link onClick={() => onClickLabels()}><button>Labels</button></Nav.Link>
-                                <Nav.Link onClick={() => onClickDatasets()}><button>Datasets</button></Nav.Link>
+                            <Nav className="me-auto" style={{fontWeight:"800"}}>
+                                <Nav.Link onClick={()=> onClickLogo()}><button style={{fontWeight:"700"}}>Home</button></Nav.Link>
+                                <Nav.Link onClick={() => onClickLabels()}><button style={{fontWeight:"700"}}>Labels</button></Nav.Link>
+                                <Nav.Link onClick={() => onClickDatasets()}><button style={{fontWeight:"700"}}>Datasets</button></Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
                     </Row>

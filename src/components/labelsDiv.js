@@ -202,46 +202,67 @@ const LabelsDiv = () => {
         console.log(commitType)
         if (commitId == ''){
             window.alert("please first choose a commit to label")
+            return
         } else if (labeled.length == 0 || commitType =='type of commit'){
             window.alert("please provide complete information for the commit, i.e. label, type of commit and scores")
+            return
         } else if (github == "") {
             window.alert("you may not have signed up, go to the landing page and sign up")
+            return
         } else {
             const data = []
-
+            let allFine = true
             labeled.forEach(label=>{
                 const index = labeled.indexOf(label)
                 const score = e.target[index+1].value
-                data.push(
-                    {
-                        "commit link": commitLink,
-                        "commit id": commitId,
-                        "type of commit": commitType,
-                        "label": label,
-                        "github profile": github,
-                        "score": score
-                    }
-                )
+                const confidence = e.target[index+2].value
+                if (score == `score ${label}`) {
+                    window.alert("Please provide scores for all the Lables Provided")
+                    allFine = false
+                    return
+                } else if (confidence == `Input confidence for ${label} (1-10)`) {
+                    window.alert("Please provide confidence level for all the labels Provided")
+                    allFine = false
+                    return
+                } else {
+                    data.push(
+                        {
+                            "commit link": commitLink,
+                            "commit id": commitId,
+                            "type of commit": commitType,
+                            "label": label,
+                            "github profile": github,
+                            "score": score, 
+                            "confidence": confidence,
+                        }
+                    )
+                }
             })
-            fetch("https://sheet.best/api/sheets/4253adae-989a-427b-8e44-44be51365e06/tabs/labels", {
-                method: "POST",
-                mode: "cors",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-            })
-            .then((r) => r.json())
-            .then((data) => {
-                // The response comes here
-                console.log(data);
-                return data
-            })
-            .catch((error) => {
-                // Errors are reported there
-                console.log(error);
-            });
-            window.alert("You have posted your labels! Thank you for your contribution!")
+            if (allFine){
+                fetch("https://sheet.best/api/sheets/4253adae-989a-427b-8e44-44be51365e06/tabs/labels", {
+                        method: "POST",
+                        mode: "cors",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data),
+                    })
+                    .then((r) => r.json())
+                    .then((data) => {
+                        // The response comes here
+                        console.log(data);
+                        return data
+                    })
+                    .catch((error) => {
+                        // Errors are reported there
+                        console.log(error);
+                    });
+                    window.alert("You have posted your labels! Thank you for your contribution!")
+                
+            } else {
+                window.alert("Please provide complete information for the labels")
+                return
+            }
         }
     }
 
@@ -376,16 +397,17 @@ const LabelsDiv = () => {
                                             <option value="Feature">Feature</option>
                                             <option value="Process Change">Process Change</option>
                                         </Form.Select>
-                                        <p>input scores for the labels (1-10)</p>
+                                        <h4>input scores for the labels (1-10)</h4>
                                         {
                                             labeled.map(
                                                 label => {
                                                     return(
+                                                        <>
                                                             <Form.Select 
                                                                 style={{ marginBottom:"10px"}} 
                                                                 aria-label={`Input Score (0-10) for ${label}`}
                                                             >
-                                                                <option>{label}</option>
+                                                                <option>score {label}</option>
                                                                 <option value={1}>1</option>
                                                                 <option value={2}>2</option>
                                                                 <option value={3}>3</option>
@@ -397,6 +419,24 @@ const LabelsDiv = () => {
                                                                 <option value={9}>9</option>
                                                                 <option value={10}>10</option>
                                                             </Form.Select>
+                                                            <p>Input how confident you are with the label provided</p>
+                                                            <Form.Select 
+                                                                style={{ marginBottom:"10px"}} 
+                                                                aria-label={`Confidence for the label (0-10) ${label}`}
+                                                            >
+                                                                <option>Input confidence for {label} (1-10)</option>
+                                                                <option value={1}>1</option>
+                                                                <option value={2}>2</option>
+                                                                <option value={3}>3</option>
+                                                                <option value={4}>4</option>
+                                                                <option value={5}>5</option>
+                                                                <option value={6}>6</option>
+                                                                <option value={7}>7</option>
+                                                                <option value={8}>8</option>
+                                                                <option value={9}>9</option>
+                                                                <option value={10}>10</option>
+                                                            </Form.Select>
+                                                        </>  
                                                     )
                                                 }
                                             )
