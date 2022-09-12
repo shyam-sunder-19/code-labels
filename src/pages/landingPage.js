@@ -34,7 +34,6 @@ const LandingPage = () => {
         e.preventDefault()
         let github = e.target[0].value
         const prog_lang = e.target[1].value
-
         const index = github.lastIndexOf('/')
         console.log(index)
         console.log(github.length)
